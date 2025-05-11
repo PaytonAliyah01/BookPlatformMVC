@@ -1,0 +1,42 @@
+@model List<BookPlatformMVC.Models.BookshelfEntry>
+@{
+    ViewData["Title"] = "My Bookshelf";
+}
+
+<h2>My Bookshelf</h2>
+
+<div class="mb-3">
+    <form asp-action="Index" method="get">
+        <label for="status" class="form-label">Filter by Status:</label>
+        <select name="status" class="form-select w-auto d-inline-block" onchange="this.form.submit()">
+            <option value="">All</option>
+            <option value="ToRead">To Read</option>
+            <option value="Reading">Reading</option>
+            <option value="Read">Read</option>
+            <option value="Owned">Owned</option>
+        </select>
+    </form>
+</div>
+
+@if (!Model.Any())
+{
+    <p>You haven't added any books to your bookshelf yet.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var entry in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <img src="@entry.Book.CoverImageUrl" class="card-img-top" alt="@entry.Book.Title" style="height: 300px; object-fit: cover;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@entry.Book.Title</h5>
+                        <p class="card-text"><strong>Status:</strong> @entry.Status</p>
+                        <p class="card-text">@entry.Book.Description?.Substring(0, Math.Min(entry.Book.Description.Length, 100))...</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

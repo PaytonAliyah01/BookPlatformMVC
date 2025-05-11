@@ -1,0 +1,47 @@
+@model List<BookPlatformMVC.Models.Book>
+@{
+    ViewData["Title"] = "Browse Books";
+}
+
+<h2>Browse Books</h2>
+
+<form asp-action="Index" method="get" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="searchString" class="form-control" placeholder="Search for books..." />
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
+
+@if (Model.Count == 0)
+{
+    <p>No books found.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <img src="@book.CoverImageUrl" class="card-img-top" alt="@book.Title" style="height: 300px; object-fit: cover;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@book.Title</h5>
+                        <p class="card-text"><strong>Author:</strong> @book.Author</p>
+                        <p class="card-text">@book.Description?.Substring(0, Math.Min(book.Description.Length, 100))...</p>
+
+                        <form asp-controller="Bookshelf" asp-action="Add" method="post">
+                            <input type="hidden" name="bookId" value="@book.Id" />
+                            <select name="status" class="form-select mb-2">
+                                <option value="ToRead">To Read</option>
+                                <option value="Reading">Reading</option>
+                                <option value="Read">Read</option>
+                                <option value="Owned">Owned</option>
+                            </select>
+                            <button type="submit" class="btn btn-success w-100">Add to Bookshelf</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

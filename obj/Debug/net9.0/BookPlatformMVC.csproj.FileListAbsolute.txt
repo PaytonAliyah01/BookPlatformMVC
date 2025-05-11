@@ -1,0 +1,9 @@
+C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\BookPlatformMVC.csproj.AssemblyReference.cache
+C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\BookPlatformMVC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\BookPlatformMVC.AssemblyInfoInputs.cache
+C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\BookPlatformMVC.AssemblyInfo.cs
+C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\BookPlatformMVC.csproj.CoreCompileInputs.cache
+C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\BookPlatformMVC.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\BookPlatformMVC.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\BookPlatformMVC.RazorAssemblyInfo.cache
+C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\BookPlatformMVC.RazorAssemblyInfo.cs
