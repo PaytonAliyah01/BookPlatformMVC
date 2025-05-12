@@ -1,0 +1,10 @@
+@model BookPlatformMVC.Models.BookClub
+
+<h2>Delete Book Club</h2>
+<p>Are you sure you want to delete the book club "@Model.Name"?</p>
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="BookClub" class="btn btn-secondary">Cancel</a>
+</form>

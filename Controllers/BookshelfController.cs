@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using BookPlatformMVC.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
+using BookPlatformMVC.Models;
+
 
 [Authorize]
 public class BookshelfController : Controller

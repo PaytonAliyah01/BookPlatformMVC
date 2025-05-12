@@ -1,5 +1,5 @@
-
-public class Book
+namespace BookPlatformMVC.Models{
+    public class Book
 {
     public int Id { get; set; }
     public required string Title { get; set; }
@@ -7,3 +7,4 @@ public class Book
     public string? Description { get; set; }
     public required string CoverImageUrl { get; set; }
 }
+};
