@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hello\\BookPlatformMVC\\BookPlatformMVC.csproj": {}
+    "c:\\Users\\hello\\BookPlatformMVC\\BookPlatformMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hello\\BookPlatformMVC\\BookPlatformMVC.csproj": {
+    "c:\\Users\\hello\\BookPlatformMVC\\BookPlatformMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hello\\BookPlatformMVC\\BookPlatformMVC.csproj",
+        "projectUniqueName": "c:\\Users\\hello\\BookPlatformMVC\\BookPlatformMVC.csproj",
         "projectName": "BookPlatformMVC",
-        "projectPath": "C:\\Users\\hello\\BookPlatformMVC\\BookPlatformMVC.csproj",
+        "projectPath": "c:\\Users\\hello\\BookPlatformMVC\\BookPlatformMVC.csproj",
         "packagesPath": "C:\\Users\\hello\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hello\\BookPlatformMVC\\obj\\",
+        "outputPath": "c:\\Users\\hello\\BookPlatformMVC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
