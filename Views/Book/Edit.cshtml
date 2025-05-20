@@ -1,0 +1,96 @@
+@model BookPlatformMVC.Models.Book
+
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<div class="page-wrapper">
+    <div class="book-edit-container">
+        <h1>@ViewData["Title"]</h1>
+
+        <div id="viewMode">
+            <div class="cover-image-container">
+                @if (!string.IsNullOrEmpty(Model.ImagePath ))
+                {
+                    <img src="@Model.ImagePath" alt="Book Cover" style="max-width:200px;" />
+                }
+                else
+                {
+                    <p>No cover uploaded.</p>
+                }
+            </div>
+            <p><strong>Title:</strong> @Model.Title</p>
+            <p><strong>Author:</strong> @Model.Author</p>
+            <p><strong>Description:</strong> @Model.Description</p>
+            <p><strong>Page Count:</strong> @Model.PageCount</p>
+            <p><strong>Published Date:</strong> @($"{Model.PublishedDate:yyyy-MM-dd}")</p>
+            <button id="editButton" class="edit-button" type="button">Edit Book</button>
+        </div>
+
+        <div id="editMode" style="display:none;">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group cover-image-container">
+                    @if (!string.IsNullOrEmpty(Model.ImagePath ))
+                    {
+                        <img src="@Model.ImagePath" alt="Book Cover" style="max-width:200px;" />
+                    }
+                    else
+                    {
+                        <p>No cover uploaded.</p>
+                    }
+                    <label>Upload New Cover</label>
+                    <input type="file" name="CoverImageFile" accept="image/*" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Author"></label>
+                    <input asp-for="Author" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PageCount"></label>
+                    <input asp-for="PageCount" type="number" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PublishedDate"></label>
+                    <input asp-for="PublishedDate" type="date" class="form-control" />
+                </div>
+
+                <button type="submit" class="btn btn-success mt-2">Save Changes</button>
+                <button id="cancelButton" type="button" class="btn btn-secondary mt-2">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const editButton = document.getElementById('editButton');
+        const cancelButton = document.getElementById('cancelButton');
+        const viewMode = document.getElementById('viewMode');
+        const editMode = document.getElementById('editMode');
+
+        editButton.addEventListener('click', () => {
+            viewMode.style.display = 'none';
+            editMode.style.display = 'block';
+        });
+
+        cancelButton.addEventListener('click', () => {
+            editMode.style.display = 'none';
+            viewMode.style.display = 'block';
+        });
+    </script>
+}

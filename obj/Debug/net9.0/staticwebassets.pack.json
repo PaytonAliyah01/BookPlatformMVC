@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_73.png",
+      "PackagePath": "staticwebassets\\images\\book_73.png"
+    },
+    {
+      "Id": "C:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\default-cover.png",
+      "PackagePath": "staticwebassets\\images\\default-cover.png"
+    },
+    {
       "Id": "C:\\Users\\hello\\BookPlatformMVC\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

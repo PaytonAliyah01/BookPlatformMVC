@@ -20,22 +20,52 @@ public class ReviewController : Controller
     {
         var reviews = await _context.Reviews
             .Include(r => r.User)
-            .Where(r => r.BookId == bookId)
+            .Include(r => r.Book)
             .ToListAsync();
-        
-        // Specify the Review folder explicitly
-        return View("Review", reviews); // Assuming 'Review.cs' is inside 'Views/Review' folder
+
+        ViewBag.BookId = bookId; // Pass bookId to view
+
+        return View("Review", reviews);
     }
 
     // POST: Create a Review
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(int bookId, string content, int rating)
+    public async Task<IActionResult> Create(int bookId, string content, double rating)
     {
+        if (bookId <= 0)
+        {
+            ModelState.AddModelError("", "You must select a valid book to review.");
+        }
+
         var userId = _userManager.GetUserId(User);
         if (userId == null)
         {
             return BadRequest("User is not logged in.");
+        }
+
+        if (rating < 1 || rating > 5)
+        {
+            ModelState.AddModelError("Rating", "Rating must be between 1 and 5.");
+        }
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            ModelState.AddModelError("Content", "Review content is required.");
+        }
+        if (!ModelState.IsValid)
+        {
+            // Save submitted content for repopulation in the view
+            ViewData["SubmittedContent"] = content;
+
+            // Re-fetch reviews for the view in case of error
+            var reviews = await _context.Reviews
+                .Include(r => r.User)
+                .Where(r => r.BookId == bookId)
+                .ToListAsync();
+
+            ViewBag.BookId = bookId; // Make sure bookId is passed too
+
+            return View("Review", reviews);
         }
 
         var review = new Review
@@ -44,7 +74,7 @@ public class ReviewController : Controller
             UserId = userId,
             Content = content,
             Rating = rating,
-            CreatedAt = DateTime.Now
+            CreatedAt = DateTime.UtcNow
         };
 
         _context.Reviews.Add(review);
@@ -52,4 +82,5 @@ public class ReviewController : Controller
 
         return RedirectToAction(nameof(Review), new { bookId });
     }
+
 }

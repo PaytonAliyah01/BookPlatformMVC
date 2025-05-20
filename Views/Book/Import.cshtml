@@ -1,0 +1,68 @@
+@model BookPlatformMVC.Models.Book
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Import Books";
+}
+
+<h2>Import Books</h2>
+
+<!-- Display Success or Error Messages -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<h3>Manual Entry</h3>
+<form asp-action="ImportManual" method="post" enctype="multipart/form-data" class="mb-4">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Author"></label>
+        <input asp-for="Author" class="form-control" />
+        <span asp-validation-for="Author" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Cover Image URL (optional)</label>
+        <input name="CoverImageUrl" class="form-control" placeholder="Enter image URL" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Or upload Cover Image file</label>
+        <input type="file" name="CoverImageFile" class="form-control" accept="image/*" />
+    </div>
+
+    <small class="form-text text-muted mb-3">
+        You can either provide a Cover Image URL or upload an image file. If both are provided, the uploaded file will be used.
+    </small>
+
+    <button type="submit" class="btn btn-primary mt-2">Add Book</button>
+</form>
+
+<hr />
+
+<h3>Import from CSV</h3>
+<form asp-action="ImportCsv" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="csvFile">Upload a CSV file (Goodreads or StoryGraph)</label>
+        <input type="file" name="csvFile" accept=".csv" class="form-control-file" />
+    </div>
+    <button type="submit" class="btn btn-success mt-2">Upload CSV</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

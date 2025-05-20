@@ -1,0 +1,44 @@
+@model BookshelfEntryEditViewModel
+
+<h2>Edit Bookshelf Entry for @Model.BookTitle</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="BookId" />
+
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<ReadingStatus>()"></select>
+    </div>
+
+    <div class="form-group">
+        @if (Model.PageCount > 0) {
+            <label for="CurrentPage">Progress (Page Number)</label>
+            <input asp-for="CurrentPage" class="form-control" type="number" min="1" max="@Model.PageCount" />
+            <small class="form-text text-muted">
+                Out of @Model.PageCount pages. We'll calculate the percentage for you.
+            </small>
+        } else {
+            <label asp-for="ProgressPercent">Progress (%)</label>
+            <input asp-for="ProgressPercent" class="form-control" type="number" min="0" max="100" />
+            <small class="form-text text-muted">Enter a percentage between 0–100.</small>
+        }
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StartedReadingDate"></label>
+        <input asp-for="StartedReadingDate" class="form-control" type="date" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FinishedReadingDate"></label>
+        <input asp-for="FinishedReadingDate" class="form-control" type="date" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Ownership"></label>
+        <select asp-for="Ownership" class="form-control" asp-items="Html.GetEnumSelectList<OwnershipType>()"></select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

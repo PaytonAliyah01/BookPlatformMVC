@@ -1,0 +1,23 @@
+@model BookPlatformMVC.Models.Book
+
+<h2>Book Details</h2>
+
+<div>
+    <strong>Title:</strong> @Model.Title<br />
+    <strong>Author:</strong> @Model.Author<br />
+    <strong>Description:</strong> @Model.Description<br />
+    <strong>Pages:</strong> @Model.PageCount<br />
+    <strong>Published:</strong> @Model.PublishedDate?.ToShortDateString()<br />
+    <strong>Cover:</strong><br />
+    @if (!string.IsNullOrEmpty(Model.ImagePath ))
+    {
+        <img src="@Model.ImagePath" alt="Cover" style="max-width:200px;" />
+    }
+    else
+    {
+        <p>No cover image uploaded.</p>
+    }
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mt-3">Edit</a>
+<a asp-action="Index" class="btn btn-secondary mt-3">Back to List</a>

@@ -1,4 +1,5 @@
 @model Dictionary<string, List<BookPlatformMVC.Models.BookshelfEntry>>
+
 @{
     ViewData["Title"] = "My Bookshelf";
 }
@@ -26,20 +27,32 @@ else
 {
     @foreach (var group in Model)
     {
-        <h3>@group.Key</h3> <!-- This will display the status group (e.g., "To Read", "Reading", "Read") -->
+        <h3>@group.Key</h3> <!-- Status group like "Reading", "Read", etc. -->
         <div class="row">
             @foreach (var entry in group.Value)
             {
                 <div class="col-md-4 mb-3">
                     <div class="card h-100">
-                        @if (entry.Book?.CoverImageUrl != null)
+                        @if (entry.Book?.ImagePath  != null)
                         {
-                            <img src="@entry.Book.CoverImageUrl" class="card-img-top" alt="@entry.Book.Title" style="height: 300px; object-fit: cover;" />
+                            <img src="@entry.Book.ImagePath" class="card-img-top" alt="@entry.Book.Title" style="height: 300px; object-fit: cover;" />
                         }
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             <h5 class="card-title">@entry.Book?.Title ?? "Unknown Title"</h5>
                             <p class="card-text"><strong>Status:</strong> @entry.Status</p>
-                            <p class="card-text">@((entry.Book?.Description != null) ? entry.Book.Description.Substring(0, Math.Min(entry.Book.Description.Length, 100)) + "..." : "No description available.")</p>
+                            <p class="card-text">
+                                @((entry.Book?.Description != null) 
+                                    ? entry.Book.Description.Substring(0, Math.Min(entry.Book.Description.Length, 100)) + "..." 
+                                    : "No description available.")
+                            </p>
+
+                            <div class="mt-auto d-flex justify-content-between">
+                                <a asp-action="Edit" asp-route-id="@entry.Id" class="btn btn-primary btn-sm">Edit</a>
+                                <form asp-action="Remove" method="post" asp-route-entryId="@entry.Id" onsubmit="return confirm('Are you sure you want to remove this book?');">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                                <a asp-controller="Book" asp-action="Details" asp-route-id="@entry.BookId" class="btn btn-secondary btn-sm">View</a>
+                            </div>
                         </div>
                     </div>
                 </div>
