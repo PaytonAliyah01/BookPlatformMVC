@@ -19,6 +19,8 @@ public class BookPlatformMVCIdentityDbContext : IdentityDbContext<IdentityUser>
     public DbSet<Review> Reviews { get; set; }
     public DbSet<DiscussionThread> DiscussionThreads { get; set; }
     public DbSet<DiscussionPost> DiscussionPosts { get; set; }
+    public DbSet<ReadingSession> ReadingSessions { get; set; }
+    public DbSet<Statistics> Statistics { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

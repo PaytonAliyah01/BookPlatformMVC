@@ -45,7 +45,8 @@ namespace BookPlatformMVC.Services
                             Title = r.Title,
                             Author = r.Author,
                             Description = r.MyReview,
-                            ImagePath  = "/images/default-cover.png"
+                            ISBN = r.ISBN, // <-- Set required ISBN here
+                            ImagePath = "/images/default-cover.png"
                         }).ToList();
                     }
                     else if (firstLine.Contains("Read Status") && firstLine.Contains("Moods")) // StoryGraph
@@ -58,7 +59,8 @@ namespace BookPlatformMVC.Services
                             Title = r.Title,
                             Author = r.Author,
                             Description = r.Review,
-                            ImagePath  = "/images/default-cover.png"
+                            ISBN = r.ISBN, // <-- Set required ISBN here
+                            ImagePath = "/images/default-cover.png"
                         }).ToList();
                     }
                     else

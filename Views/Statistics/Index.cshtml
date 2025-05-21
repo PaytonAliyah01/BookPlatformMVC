@@ -1,0 +1,122 @@
+@model BookPlatformMVC.Models.Statistics
+@{
+    ViewData["Title"] = "Your Reading Statistics";
+    var readCount = (int?)ViewData["ReadCount"] ?? 0;
+    var goalCount = (int?)ViewData["GoalCount"] ?? 0;
+    var totalPages = (int?)(ViewData["TotalPages"] ?? 0);
+    var avgDaysToFinish = (double?)(ViewData["AvgDaysToFinish"] ?? 0.0);
+    var physicalCount = (int?)(ViewData["PhysicalCount"] ?? 0);
+    var digitalCount = (int?)(ViewData["DigitalCount"] ?? 0);
+    var readingStreak = (int?)(ViewData["ReadingStreak"] ?? 0);
+    var mostReadAuthors = (IEnumerable<dynamic>)(ViewData["MostReadAuthors"] ?? new List<dynamic>());
+    var avgRating = (double?)(ViewData["AvgRating"] ?? 0.0);
+}
+
+<h1>Your Reading Statistics for @Model.Year</h1>
+
+@if (TempData["GoalMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["GoalMessage"]</div>
+}
+
+<section class="mb-4">
+    <h2>📘 Reading Goal</h2>
+    <p>
+        You've read <strong>@readCount</strong> out of your goal of <strong>@goalCount</strong> books.
+    </p>
+
+    <form asp-action="SetGoal" method="post" class="form-inline mb-2">
+        <label for="targetBooks">Update Goal:</label>
+        <input type="number" id="targetBooks" name="targetBooks" min="1" required class="form-control mx-2" />
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    <canvas id="goalChart" width="300" height="300"></canvas>
+</section>
+
+<section class="mb-4">
+    <h2>📊 Book Format</h2>
+    <p><strong>Physical:</strong> @physicalCount</p>
+    <p><strong>Digital:</strong> @digitalCount</p>
+    <canvas id="ownershipChart" width="300" height="300"></canvas>
+</section>
+
+<section class="mb-4">
+    <h2>📚 Additional Stats</h2>
+    <p><strong>Total Pages Read:</strong> @totalPages</p>
+    <p><strong>Average Days to Finish a Book:</strong> @(string.Format("{0:0.##}", avgDaysToFinish))</p>
+    <p><strong>Current Reading Streak:</strong> @readingStreak days</p>
+    <p><strong>Average Rating:</strong> @(string.Format("{0:0.0}", avgRating)) / 5</p>
+</section>
+
+<section class="mb-4">
+    <h2>👩‍💻 Most Read Authors</h2>
+    @if (mostReadAuthors.Any())
+    {
+        <ul>
+            @foreach (var author in mostReadAuthors)
+            {
+                <li>@author.Author (@author.Count books)</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No authors read yet.</p>
+    }
+</section>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Goal Progress Chart
+        const goalCtx = document.getElementById('goalChart').getContext('2d');
+        new Chart(goalCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Books Read', 'Remaining'],
+                datasets: [{
+                    data: [@readCount, Math.max(@goalCount - @readCount, 0)],
+                    backgroundColor: ['#4CAF50', '#ddd']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Reading Goal Progress'
+                    }
+                }
+            }
+        });
+
+        // Ownership Format Chart
+        const formatCtx = document.getElementById('ownershipChart').getContext('2d');
+        new Chart(formatCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Physical', 'Digital'],
+                datasets: [{
+                    label: 'Books',
+                    data: [@physicalCount, @digitalCount],
+                    backgroundColor: ['#2196F3', '#FF9800']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Books by Format'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}

@@ -38,7 +38,12 @@ public class BookController : Controller
 
         if (!string.IsNullOrEmpty(searchString))
         {
-            books = books.Where(b => b.Title.Contains(searchString));
+            var lowerSearch = searchString.ToLower();
+            books = books.Where(b =>
+                b.Title.ToLower().Contains(lowerSearch) ||
+                b.Author.ToLower().Contains(lowerSearch) ||
+                b.ISBN.ToLower().Contains(lowerSearch)
+            );
         }
 
         return View("Book", await books.ToListAsync());
@@ -172,7 +177,7 @@ public class BookController : Controller
         return RedirectToAction(nameof(Book));
     }
 
-    // GET: Book/Details/5
+    // GET: Book/Details
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -185,7 +190,7 @@ public class BookController : Controller
         return View(book);
     }
 
-    // GET: Book/Edit/5
+    // GET: Book/Edit
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
@@ -218,12 +223,13 @@ public class BookController : Controller
             return NotFound();
         }
 
-        // Update scalar properties
+        // Update scalar properties including ISBN
         book.Title = model.Title;
         book.Author = model.Author;
         book.Description = model.Description;
         book.PageCount = model.PageCount;
         book.PublishedDate = model.PublishedDate;
+        book.ISBN = model.ISBN;  // <-- Added ISBN update
 
         // Folder to save cover images (same folder for all images)
         var uploadsFolder = Path.Combine(_environment.WebRootPath, "images");
@@ -279,8 +285,23 @@ public class BookController : Controller
         return RedirectToAction(nameof(Details), new { id = book.Id });
     }
 
-    private bool BookExists(int id)
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
     {
-        return _context.Books.Any(e => e.Id == id);
-    }
+        var book = await _context.Books.FindAsync(id);
+        if (book == null)
+        {
+            return NotFound();
+        }
+
+        _context.Books.Remove(book);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Book));
+}
+
+private bool BookExists(int id)
+{
+    return _context.Books.Any(e => e.Id == id);
+}
 }

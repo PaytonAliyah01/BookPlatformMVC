@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Create Discussion Thread";
+    var clubId = ViewBag.BookClubId;
+}
+
+<h2>Create a New Thread</h2>
+
+<form asp-action="Create" method="post">
+    <input type="hidden" name="clubId" value="@clubId" />
+
+    <div class="mb-3">
+        <label for="title" class="form-label">Thread Title</label>
+        <input type="text" id="title" name="title" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-success">Create Thread</button>
+</form>
+
+<a asp-action="Index" asp-route-clubId="@clubId" class="btn btn-secondary mt-2">Back to Threads</a>
+
+<partial name="_ValidationScriptsPartial" />
+<validation-summary class="text-danger" />

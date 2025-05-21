@@ -10,7 +10,7 @@
 
         <div id="viewMode">
             <div class="cover-image-container">
-                @if (!string.IsNullOrEmpty(Model.ImagePath ))
+                @if (!string.IsNullOrEmpty(Model.ImagePath))
                 {
                     <img src="@Model.ImagePath" alt="Book Cover" style="max-width:200px;" />
                 }
@@ -21,17 +21,19 @@
             </div>
             <p><strong>Title:</strong> @Model.Title</p>
             <p><strong>Author:</strong> @Model.Author</p>
+            <p><strong>ISBN:</strong> @Model.ISBN</p>
             <p><strong>Description:</strong> @Model.Description</p>
             <p><strong>Page Count:</strong> @Model.PageCount</p>
-            <p><strong>Published Date:</strong> @($"{Model.PublishedDate:yyyy-MM-dd}")</p>
+            <p><strong>Published Date:</strong> @(Model.PublishedDate.HasValue ? Model.PublishedDate.Value.ToString("yyyy-MM-dd") : "N/A")</p>
             <button id="editButton" class="edit-button" type="button">Edit Book</button>
         </div>
 
         <div id="editMode" style="display:none;">
             <form asp-action="Edit" method="post" enctype="multipart/form-data">
                 <input type="hidden" asp-for="Id" />
+                
                 <div class="form-group cover-image-container">
-                    @if (!string.IsNullOrEmpty(Model.ImagePath ))
+                    @if (!string.IsNullOrEmpty(Model.ImagePath))
                     {
                         <img src="@Model.ImagePath" alt="Book Cover" style="max-width:200px;" />
                     }
@@ -51,6 +53,11 @@
                 <div class="form-group">
                     <label asp-for="Author"></label>
                     <input asp-for="Author" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ISBN"></label>
+                    <input asp-for="ISBN" class="form-control" />
                 </div>
 
                 <div class="form-group">

@@ -19,37 +19,37 @@
         <ul>
             @foreach (var member in club.BookClubMemberships)
             {
-                <li>@member.User?.UserName ?? "Unknown User"</li>  <!-- Display the UserName of each member or "Unknown User" if null -->
+                <li>@member.User?.UserName</li>
             }
         </ul>
 
-        <!-- Show Edit/Delete buttons if the user is the creator of the club -->
         @if (club.IsCreator)
         {
             <a href="@Url.Action("Edit", "BookClub", new { id = club.Id })" class="btn btn-warning">Edit</a>
 
-           <form asp-action="Delete" method="post" style="display:inline;">
-            @Html.AntiForgeryToken()
-            <input type="hidden" name="id" value="@club.Id" />
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <form asp-action="Delete" method="post" style="display:inline;">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@club.Id" />
+                <button type="submit" class="btn btn-danger">Delete</button>
             </form>
-
         }
 
-        <!-- Join/Leave Club Button Logic -->
         @if (club.BookClubMemberships.Any(m => m.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)))
         {
             <form asp-action="Leave" method="post">
                 <input type="hidden" name="clubId" value="@club.Id" />
-                <button type="submit">Leave Club</button>
+                <button type="submit" class="btn btn-outline-secondary">Leave Club</button>
             </form>
         }
         else
         {
             <form asp-action="Join" method="post">
                 <input type="hidden" name="clubId" value="@club.Id" />
-                <button type="submit">Join Club</button>
+                <button type="submit" class="btn btn-success">Join Club</button>
             </form>
         }
+
+        <!-- ✅ View Discussions Button -->
+        <a href="@Url.Action("Index", "Discussion", new { clubId = club.Id })" class="btn btn-info mt-2">View Discussions</a>
     </div>
 }

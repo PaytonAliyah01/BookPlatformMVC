@@ -1,44 +1,63 @@
-@model BookshelfEntryEditViewModel
-
-<h2>Edit Bookshelf Entry for @Model.BookTitle</h2>
+@model BookPlatformMVC.Models.BookshelfEntry
 
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="Id" />
-    <input type="hidden" asp-for="BookId" />
 
-    <div class="form-group">
-        <label asp-for="Status"></label>
+    <div>
+        <label>Progress Entry Mode:</label><br />
+        <input type="radio" name="ProgressMode" value="Page" checked /> By Page<br />
+        <input type="radio" name="ProgressMode" value="Percent" /> By Percentage
+    </div>
+
+    <div id="pageInput">
+        <label asp-for="CurrentPage">Current Page:</label>
+        <input asp-for="CurrentPage" class="form-control" />
+        <span asp-validation-for="CurrentPage" class="text-danger"></span>
+    </div>
+
+    <div id="percentInput" style="display:none;">
+        <label asp-for="ProgressPercent">Progress Percent (%):</label>
+        <input asp-for="ProgressPercent" class="form-control" />
+        <span asp-validation-for="ProgressPercent" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Status">Status:</label>
         <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<ReadingStatus>()"></select>
+        <span asp-validation-for="Status" class="text-danger"></span>
     </div>
-
-    <div class="form-group">
-        @if (Model.PageCount > 0) {
-            <label for="CurrentPage">Progress (Page Number)</label>
-            <input asp-for="CurrentPage" class="form-control" type="number" min="1" max="@Model.PageCount" />
-            <small class="form-text text-muted">
-                Out of @Model.PageCount pages. We'll calculate the percentage for you.
-            </small>
-        } else {
-            <label asp-for="ProgressPercent">Progress (%)</label>
-            <input asp-for="ProgressPercent" class="form-control" type="number" min="0" max="100" />
-            <small class="form-text text-muted">Enter a percentage between 0–100.</small>
-        }
-    </div>
-
-    <div class="form-group">
-        <label asp-for="StartedReadingDate"></label>
+    <div>
+        <label asp-for="StartedReadingDate">Started Reading Date:</label>
         <input asp-for="StartedReadingDate" class="form-control" type="date" />
+        <span asp-validation-for="StartedReadingDate" class="text-danger"></span>   
     </div>
-
-    <div class="form-group">
-        <label asp-for="FinishedReadingDate"></label>
+    <div>
+        <label asp-for="FinishedReadingDate">Finished Reading Date:</label>
         <input asp-for="FinishedReadingDate" class="form-control" type="date" />
+        <span asp-validation-for="FinishedReadingDate" class="text-danger"></span>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Ownership"></label>
+    <div>
+        <label asp-for="Ownership">Ownership:</label>
         <select asp-for="Ownership" class="form-control" asp-items="Html.GetEnumSelectList<OwnershipType>()"></select>
+        <span asp-validation-for="Ownership" class="text-danger"></span>
     </div>
-
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit">Save</button>
 </form>
+
+@section Scripts {
+    <script>
+        const pageInput = document.getElementById("pageInput");
+        const percentInput = document.getElementById("percentInput");
+
+        document.querySelectorAll("input[name='ProgressMode']").forEach(radio => {
+            radio.addEventListener("change", function () {
+                if (this.value === "Page") {
+                    pageInput.style.display = "block";
+                    percentInput.style.display = "none";
+                } else {
+                    pageInput.style.display = "none";
+                    percentInput.style.display = "block";
+                }
+            });
+        });
+    </script>
+}

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookPlatformMVC.Migrations
 {
     [DbContext(typeof(BookPlatformMVCIdentityDbContext))]
-    [Migration("20250519213348_UpdateUserToCustomUser")]
-    partial class UpdateUserToCustomUser
+    [Migration("20250520235604_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,12 +37,21 @@ namespace BookPlatformMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CoverImageUrl")
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ISBN")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PageCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("PublishedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -118,15 +127,33 @@ namespace BookPlatformMVC.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CurrentPage")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("FinishedReadingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Ownership")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProgressPercent")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("StartedReadingDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("BookshelfEntries");
                 });
@@ -149,8 +176,8 @@ namespace BookPlatformMVC.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -162,6 +189,52 @@ namespace BookPlatformMVC.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("BookPlatformMVC.Models.Statistics", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("AverageDaysToFinish")
+                        .HasColumnType("float");
+
+                    b.Property<double>("AverageUserRating")
+                        .HasColumnType("float");
+
+                    b.Property<int>("DigitalBooksRead")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PhysicalBooksRead")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReadingStreakDays")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TargetBooks")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalBooksRead")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalPagesRead")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Statistics");
                 });
 
             modelBuilder.Entity("DiscussionPost", b =>
@@ -431,6 +504,26 @@ namespace BookPlatformMVC.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ReadingSession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReadingSessions");
+                });
+
             modelBuilder.Entity("BookPlatformMVC.Areas.Identity.Data.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -465,13 +558,21 @@ namespace BookPlatformMVC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BookPlatformMVC.Areas.Identity.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Book");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BookPlatformMVC.Models.Review", b =>
                 {
                     b.HasOne("BookPlatformMVC.Models.Book", "Book")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -481,6 +582,17 @@ namespace BookPlatformMVC.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("Book");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BookPlatformMVC.Models.Statistics", b =>
+                {
+                    b.HasOne("BookPlatformMVC.Areas.Identity.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -566,6 +678,11 @@ namespace BookPlatformMVC.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BookPlatformMVC.Models.Book", b =>
+                {
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("BookPlatformMVC.Models.BookClub", b =>

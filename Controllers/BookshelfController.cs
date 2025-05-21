@@ -5,7 +5,6 @@ using BookPlatformMVC.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using BookPlatformMVC.Models;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.Linq;
 
 [Authorize]
@@ -13,7 +12,6 @@ public class BookshelfController : Controller
 {
     private readonly BookPlatformMVCIdentityDbContext _context;
     private readonly UserManager<User> _userManager;
-
 
     public BookshelfController(BookPlatformMVCIdentityDbContext context, UserManager<User> userManager)
     {
@@ -24,6 +22,7 @@ public class BookshelfController : Controller
     public async Task<IActionResult> Bookshelf()
     {
         var userId = _userManager.GetUserId(User);
+
         var entries = await _context.BookshelfEntries
             .Include(b => b.Book)
             .Where(b => b.UserId == userId)
@@ -53,7 +52,7 @@ public class BookshelfController : Controller
             return RedirectToAction("Bookshelf");
         }
 
-        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        var user = await _userManager.GetUserAsync(User);
         if (user == null)
         {
             TempData["ErrorMessage"] = "User not found.";
@@ -63,10 +62,10 @@ public class BookshelfController : Controller
         var entry = new BookshelfEntry
         {
             BookId = bookId,
-            UserId = userId,
-            Status = status,
             Book = book,
-            User = user
+            UserId = userId,
+            User = user,
+            Status = status
         };
 
         _context.BookshelfEntries.Add(entry);
@@ -85,9 +84,12 @@ public class BookshelfController : Controller
 
         if (entry != null)
         {
+            var bookTitle = entry.Book?.Title ?? "Unknown";
+
             _context.BookshelfEntries.Remove(entry);
             await _context.SaveChangesAsync();
-            TempData["SuccessMessage"] = $"Book '{entry.Book.Title}' removed from bookshelf.";
+
+            TempData["SuccessMessage"] = $"Book '{bookTitle}' removed from bookshelf.";
         }
         else
         {
@@ -112,93 +114,100 @@ public class BookshelfController : Controller
         if (entry == null)
             return NotFound();
 
-        int? currentPage = null;
         if (entry.ProgressPercent.HasValue && entry.Book.PageCount > 0)
         {
-            currentPage = (int)Math.Round(entry.ProgressPercent.Value / 100.0 * entry.Book.PageCount);
-        }
-
-        var model = new BookshelfEntryEditViewModel
-        {
-            Id = entry.Id,
-            BookId = entry.BookId,
-            BookTitle = entry.Book.Title,
-            Status = entry.Status,
-            ProgressPercent = entry.ProgressPercent,
-            CurrentPage = currentPage,
-            PageCount = entry.Book.PageCount,
-            StartedReadingDate = entry.StartedReadingDate,
-            FinishedReadingDate = entry.FinishedReadingDate,
-            Ownership = entry.Ownership
-        };
-
-        return View(model);
-    }
-
-
-
-    // POST: Bookshelf/Edit
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(BookshelfEntryEditViewModel model)
-    {
-        var userId = _userManager.GetUserId(User);
-
-        if (!ModelState.IsValid)
-        {
-            return View(model);
-        }
-
-        var entry = await _context.BookshelfEntries
-            .Include(e => e.Book)
-            .FirstOrDefaultAsync(e => e.Id == model.Id && e.UserId == userId);
-
-        if (entry == null)
-        {
-            return NotFound();
-        }
-
-        // Update entry properties from model
-        entry.Status = model.Status;
-        entry.StartedReadingDate = model.StartedReadingDate;
-        entry.FinishedReadingDate = model.FinishedReadingDate;
-        entry.Ownership = model.Ownership;
-
-        // Calculate ProgressPercent based on CurrentPage and PageCount, if available
-        if (model.CurrentPage.HasValue && model.PageCount > 0)
-        {
-            entry.ProgressPercent = (int?)Math.Round((model.CurrentPage.GetValueOrDefault() / (double)model.PageCount) * 100.0);
+            entry.CurrentPage = (int)Math.Round(entry.ProgressPercent.Value / 100.0 * entry.Book.PageCount);
         }
         else
         {
-            entry.ProgressPercent = model.ProgressPercent;
+            entry.CurrentPage = null;
+        }
+
+        return View(entry);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(ReadingStatus Status, int? CurrentPage, int? ProgressPercent, DateTime? StartedReadingDate, DateTime? FinishedReadingDate, OwnershipType Ownership)
+    {
+        var userId = _userManager.GetUserId(User);
+        var entryId = Convert.ToInt32(Request.Form["Id"]);
+        var progressMode = Request.Form["ProgressMode"];
+
+        var entry = await _context.BookshelfEntries
+            .Include(e => e.Book)
+            .FirstOrDefaultAsync(e => e.Id == entryId && e.UserId == userId);
+
+        if (entry == null)
+            return NotFound();
+
+        var bookTitle = entry.Book?.Title ?? 
+                        await _context.Books
+                            .Where(b => b.Id == entry.BookId)
+                            .Select(b => b.Title)
+                            .FirstOrDefaultAsync() ?? 
+                        "Unknown";
+
+        entry.Status = Status;
+        entry.StartedReadingDate = StartedReadingDate;
+        entry.FinishedReadingDate = FinishedReadingDate;
+        entry.Ownership = Ownership;
+
+        if (Status == ReadingStatus.Reading && entry.StartedReadingDate == null)
+            entry.StartedReadingDate = DateTime.Now;
+
+        if (Status == ReadingStatus.Finished)
+        {
+            if (entry.StartedReadingDate == null)
+                entry.StartedReadingDate = DateTime.Now;
+
+            entry.FinishedReadingDate = DateTime.Now;
+        }
+
+        if (progressMode == "Page")
+        {
+            entry.CurrentPage = CurrentPage;
+            if (entry.Book != null && entry.Book.PageCount > 0 && CurrentPage.HasValue)
+            {
+                entry.ProgressPercent = (int?)Math.Round(CurrentPage.Value / (double)entry.Book.PageCount * 100.0);
+            }
+            else
+            {
+                entry.ProgressPercent = null;
+            }
+        }
+        else if (progressMode == "Percent")
+        {
+            entry.ProgressPercent = ProgressPercent;
+            if (entry.Book != null && entry.Book.PageCount > 0 && ProgressPercent.HasValue)
+            {
+                entry.CurrentPage = (int?)Math.Round(ProgressPercent.Value / 100.0 * entry.Book.PageCount);
+            }
+            else
+            {
+                entry.CurrentPage = null;
+            }
         }
 
         try
         {
             _context.Update(entry);
             await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = $"Book '{bookTitle}' updated successfully!";
         }
         catch (DbUpdateConcurrencyException)
         {
             if (userId == null || !BookshelfEntryExists(entry.Id, userId))
-            {
                 return NotFound();
-            }
-            else
-            {
-                throw;
-            }
+
+            throw;
         }
 
-        return RedirectToAction("Details", new { id = entry.Id });
+        return RedirectToAction("Bookshelf", new { id = entry.Id });
     }
 
     private bool BookshelfEntryExists(int id, string userId)
     {
         return _context.BookshelfEntries.Any(e => e.Id == id && e.UserId == userId);
     }
-
-
-
 }

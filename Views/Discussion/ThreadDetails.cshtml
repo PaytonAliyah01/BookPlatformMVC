@@ -1,0 +1,31 @@
+@model DiscussionThread
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+
+<h2>@Model.Title</h2>
+<p><i>Started on @Model.CreatedAt.ToShortDateString()</i></p>
+
+<hr />
+<h4>Posts</h4>
+
+@foreach (var post in Model.Posts.OrderByDescending(p => p.CreatedAt))
+{
+    <div class="border p-2 mb-2">
+        <strong>@post.User?.UserName</strong> said:<br />
+        @post.Content
+        <div class="text-muted" style="font-size: small;">@post.CreatedAt</div>
+    </div>
+}
+
+<hr />
+<h4>Add Your Thoughts</h4>
+
+<form asp-action="Post" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="threadId" value="@Model.Id" />
+
+    <div class="form-group">
+        <textarea name="content" class="form-control" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Post</button>
+</form>

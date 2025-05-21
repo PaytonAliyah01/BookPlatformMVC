@@ -1,0 +1,46 @@
+@model List<DiscussionThread>
+@{
+    ViewData["Title"] = "Discussion Threads";
+    var clubId = ViewBag.BookClubId;
+}
+
+<h2>Discussion Threads</h2>
+
+<a asp-action="Create" asp-route-clubId="@clubId" class="btn btn-primary mb-3">+ New Thread</a>
+
+@if (!Model.Any())
+{
+    <p>No discussion threads yet.</p>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var thread in Model)
+        {
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <strong>@thread.Title</strong>
+                    <a asp-action="ThreadDetails" asp-route-threadId="@thread.Id" class="btn btn-sm btn-primary">
+                        View Thread
+                    </a>
+                </div>
+                <small>@thread.CreatedAt.ToString("g")</small>
+                @if (thread.Posts?.Any() == true)
+                {
+                    <div class="mt-2">
+                        <strong>Posts:</strong>
+                        <ul class="list-unstyled">
+                            @foreach (var post in thread.Posts.OrderByDescending(p => p.CreatedAt))
+                            {
+                                <li class="border-bottom py-1">
+                                    <div>@post.Content</div>
+                                    <small class="text-muted">@post.CreatedAt.ToString("g")</small>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </li>
+        }
+    </ul>
+}

@@ -30,23 +30,23 @@
         <span asp-validation-for="Author" class="text-danger"></span>
     </div>
     <div class="form-group">
+        <label asp-for="ISBN"></label>
+        <input asp-for="ISBN" class="form-control" />
+        <span asp-validation-for="ISBN" class="text-danger"></span>
+    </div>
+    <div class="form-group">
         <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
     <div class="form-group mb-2">
-        <label>Cover Image URL (optional)</label>
-        <input name="CoverImageUrl" class="form-control" placeholder="Enter image URL" />
-    </div>
-
-    <div class="form-group mb-2">
-        <label>Or upload Cover Image file</label>
+        <label>Upload Cover Image file</label>
         <input type="file" name="CoverImageFile" class="form-control" accept="image/*" />
     </div>
 
     <small class="form-text text-muted mb-3">
-        You can either provide a Cover Image URL or upload an image file. If both are provided, the uploaded file will be used.
+        You can upload a cover image file for the book.
     </small>
 
     <button type="submit" class="btn btn-primary mt-2">Add Book</button>

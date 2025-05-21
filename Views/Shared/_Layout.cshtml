@@ -23,10 +23,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        
                         <!-- Check if user is authenticated -->
                         @if (User?.Identity?.IsAuthenticated == true)
                         {
@@ -46,6 +42,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="BookClub" asp-action="BookClub">Book Clubs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Statistics" asp-action="Index">Statistics</a>
                             </li>
                         }
                         else

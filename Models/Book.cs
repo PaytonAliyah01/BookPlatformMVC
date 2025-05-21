@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookPlatformMVC.Models
-{
+{    
     public class Book
     {
         public int Id { get; set; }
         public required string Title { get; set; }
+        public required string ISBN { get; set; } // International Standard Book Number
         public required string Author { get; set; }
         public string? Description { get; set; }
         public string? ImagePath { get; set; }

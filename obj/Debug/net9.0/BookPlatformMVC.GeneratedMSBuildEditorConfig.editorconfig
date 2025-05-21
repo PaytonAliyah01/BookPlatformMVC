@@ -112,6 +112,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va1xJbXBvcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/hello/BookPlatformMVC/Views/Discussion/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzY3Vzc2lvblxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hello/BookPlatformMVC/Views/Discussion/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzY3Vzc2lvblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hello/BookPlatformMVC/Views/Discussion/ThreadDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzY3Vzc2lvblxUaHJlYWREZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hello/BookPlatformMVC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -134,6 +146,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/hello/BookPlatformMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hello/BookPlatformMVC/Views/Statistics/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdGlzdGljc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hello/BookPlatformMVC/Views/_ViewImports.cshtml]

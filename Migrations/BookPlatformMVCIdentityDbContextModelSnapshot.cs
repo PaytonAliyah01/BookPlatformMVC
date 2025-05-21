@@ -37,6 +37,10 @@ namespace BookPlatformMVC.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ISBN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
@@ -120,6 +124,9 @@ namespace BookPlatformMVC.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CurrentPage")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("FinishedReadingDate")
                         .HasColumnType("datetime2");
 
@@ -179,6 +186,52 @@ namespace BookPlatformMVC.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("BookPlatformMVC.Models.Statistics", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("AverageDaysToFinish")
+                        .HasColumnType("float");
+
+                    b.Property<double>("AverageUserRating")
+                        .HasColumnType("float");
+
+                    b.Property<int>("DigitalBooksRead")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PhysicalBooksRead")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReadingStreakDays")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TargetBooks")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalBooksRead")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalPagesRead")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Statistics");
                 });
 
             modelBuilder.Entity("DiscussionPost", b =>
@@ -448,6 +501,26 @@ namespace BookPlatformMVC.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ReadingSession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReadingSessions");
+                });
+
             modelBuilder.Entity("BookPlatformMVC.Areas.Identity.Data.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -506,6 +579,17 @@ namespace BookPlatformMVC.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("Book");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BookPlatformMVC.Models.Statistics", b =>
+                {
+                    b.HasOne("BookPlatformMVC.Areas.Identity.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
