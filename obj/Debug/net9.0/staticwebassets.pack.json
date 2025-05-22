@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_1.png",
+      "PackagePath": "staticwebassets\\images\\book_1.png"
+    },
+    {
       "Id": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_153.png",
       "PackagePath": "staticwebassets\\images\\book_153.png"
     },
@@ -25,12 +29,20 @@
       "PackagePath": "staticwebassets\\images\\book_68.jpg"
     },
     {
+      "Id": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_69.jpg",
+      "PackagePath": "staticwebassets\\images\\book_69.jpg"
+    },
+    {
       "Id": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_7.png",
       "PackagePath": "staticwebassets\\images\\book_7.png"
     },
     {
       "Id": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_73.png",
       "PackagePath": "staticwebassets\\images\\book_73.png"
+    },
+    {
+      "Id": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_93.jpg",
+      "PackagePath": "staticwebassets\\images\\book_93.jpg"
     },
     {
       "Id": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\default-cover.png",

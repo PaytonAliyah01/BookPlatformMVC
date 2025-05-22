@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0HaqPVEH5R1tgJAuY/BFiqqilm0acJJKiIKsGp7j3hs=",
+  "Hash": "+MMvgZVrF7GmAbYbBrZk67ar01zktfOmp9CPxFtW9U4=",
   "Source": "BookPlatformMVC",
   "BasePath": "_content/BookPlatformMVC",
   "Mode": "Default",
@@ -4070,6 +4070,27 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_1.png",
+      "SourceId": "BookPlatformMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\",
+      "BasePath": "_content/BookPlatformMVC",
+      "RelativePath": "images/book_1#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "phos7gxgto",
+      "Integrity": "/SHUymvvd5teUChVO7Zqn3zXQByBiDE7dv3FXF3s7MY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\book_1.png"
+    },
+    {
       "Identity": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_153.png",
       "SourceId": "BookPlatformMVC",
       "SourceType": "Discovered",
@@ -4133,6 +4154,27 @@
       "OriginalItemSpec": "wwwroot\\images\\book_68.jpg"
     },
     {
+      "Identity": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_69.jpg",
+      "SourceId": "BookPlatformMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\",
+      "BasePath": "_content/BookPlatformMVC",
+      "RelativePath": "images/book_69#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yv2qdyonq1",
+      "Integrity": "4jnXMHp6hpP8PA5BmUsBy+EHOM3eqm9+6BifufuqMS8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\book_69.jpg"
+    },
+    {
       "Identity": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_7.png",
       "SourceId": "BookPlatformMVC",
       "SourceType": "Discovered",
@@ -4173,6 +4215,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\book_73.png"
+    },
+    {
+      "Identity": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_93.jpg",
+      "SourceId": "BookPlatformMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\",
+      "BasePath": "_content/BookPlatformMVC",
+      "RelativePath": "images/book_93#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "styw6nya7y",
+      "Integrity": "sGU8nYPAz83ZjTgQnALRaaKGD5qVqUiEkDN6yeLeVw4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\book_93.jpg"
     },
     {
       "Identity": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\default-cover.png",
@@ -15276,6 +15339,88 @@
       ]
     },
     {
+      "Route": "images/book_1.phos7gxgto.png",
+      "AssetFile": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_1.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54842"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/SHUymvvd5teUChVO7Zqn3zXQByBiDE7dv3FXF3s7MY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 May 2025 08:03:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "phos7gxgto"
+        },
+        {
+          "Name": "label",
+          "Value": "images/book_1.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/SHUymvvd5teUChVO7Zqn3zXQByBiDE7dv3FXF3s7MY="
+        }
+      ]
+    },
+    {
+      "Route": "images/book_1.png",
+      "AssetFile": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_1.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54842"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/SHUymvvd5teUChVO7Zqn3zXQByBiDE7dv3FXF3s7MY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 22 May 2025 08:03:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/SHUymvvd5teUChVO7Zqn3zXQByBiDE7dv3FXF3s7MY="
+        }
+      ]
+    },
+    {
       "Route": "images/book_153.7hw05v0mmx.png",
       "AssetFile": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_153.png",
       "Selectors": [],
@@ -15522,6 +15667,88 @@
       ]
     },
     {
+      "Route": "images/book_69.jpg",
+      "AssetFile": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_69.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "45552"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4jnXMHp6hpP8PA5BmUsBy+EHOM3eqm9+6BifufuqMS8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 May 2025 00:31:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4jnXMHp6hpP8PA5BmUsBy+EHOM3eqm9+6BifufuqMS8="
+        }
+      ]
+    },
+    {
+      "Route": "images/book_69.yv2qdyonq1.jpg",
+      "AssetFile": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_69.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "45552"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4jnXMHp6hpP8PA5BmUsBy+EHOM3eqm9+6BifufuqMS8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 May 2025 00:31:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yv2qdyonq1"
+        },
+        {
+          "Name": "label",
+          "Value": "images/book_69.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4jnXMHp6hpP8PA5BmUsBy+EHOM3eqm9+6BifufuqMS8="
+        }
+      ]
+    },
+    {
       "Route": "images/book_7.7hw05v0mmx.png",
       "AssetFile": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_7.png",
       "Selectors": [],
@@ -15682,6 +15909,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-ldohhJIsHDHI5AtpVfJsjE2gw/oeMNL4+sdTuuIqbfw="
+        }
+      ]
+    },
+    {
+      "Route": "images/book_93.jpg",
+      "AssetFile": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_93.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "42917"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"sGU8nYPAz83ZjTgQnALRaaKGD5qVqUiEkDN6yeLeVw4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 May 2025 00:39:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-sGU8nYPAz83ZjTgQnALRaaKGD5qVqUiEkDN6yeLeVw4="
+        }
+      ]
+    },
+    {
+      "Route": "images/book_93.styw6nya7y.jpg",
+      "AssetFile": "c:\\Users\\hello\\BookPlatformMVC\\wwwroot\\images\\book_93.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "42917"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"sGU8nYPAz83ZjTgQnALRaaKGD5qVqUiEkDN6yeLeVw4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 21 May 2025 00:39:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "styw6nya7y"
+        },
+        {
+          "Name": "label",
+          "Value": "images/book_93.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-sGU8nYPAz83ZjTgQnALRaaKGD5qVqUiEkDN6yeLeVw4="
         }
       ]
     },

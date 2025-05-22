@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookPlatformMVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b80be95fea3edf88fab742480ea787650c1f4c08")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8cad94ddca3a6ffe1574d7b4829f53253b6009b")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookPlatformMVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookPlatformMVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

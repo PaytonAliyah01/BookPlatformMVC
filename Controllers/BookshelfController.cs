@@ -19,18 +19,29 @@ public class BookshelfController : Controller
         _userManager = userManager;
     }
 
-    public async Task<IActionResult> Bookshelf()
+    public async Task<IActionResult> Bookshelf(string status)
     {
         var userId = _userManager.GetUserId(User);
 
-        var entries = await _context.BookshelfEntries
+        var query = _context.BookshelfEntries
             .Include(b => b.Book)
-            .Where(b => b.UserId == userId)
-            .ToListAsync();
+            .Where(b => b.UserId == userId);
+
+        ReadingStatus? filterStatus = null;
+
+        if (!string.IsNullOrEmpty(status) && Enum.TryParse<ReadingStatus>(status, out var parsedStatus))
+        {
+            filterStatus = parsedStatus;
+            query = query.Where(b => b.Status == parsedStatus);
+        }
+
+        var entries = await query.ToListAsync();
 
         var grouped = entries
             .GroupBy(e => e.Status.ToString())
             .ToDictionary(g => g.Key, g => g.ToList());
+
+        ViewBag.FilterStatus = filterStatus?.ToString(); // So you can optionally show it in the view
 
         return View(grouped);
     }
