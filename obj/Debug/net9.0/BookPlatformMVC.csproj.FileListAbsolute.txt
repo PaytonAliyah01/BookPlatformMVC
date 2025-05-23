@@ -332,7 +332,6 @@ C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\compressed\nezrqnk58p-muycvpuwrr
 C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\compressed\v0zgfp0y55-87fc7y1x7t.gz
 C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\compressed\yfc7ypekbg-mlv21k5csn.gz
 C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\compressed\ks7tug8ifd-b9sayid5wm.gz
-C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\compressed\hzs66vy22l-61n19gt1b8.gz
 C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\compressed\s85avsh95y-xtxxf3hu2r.gz
 C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\compressed\sny3e3hv3q-bqjiyaj88i.gz
 C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\compressed\aizndinhkc-c2jlpeoesf.gz
@@ -410,3 +409,4 @@ C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\refint\BookPlatformMVC.dll
 C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\BookPlatformMVC.pdb
 C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\BookPlatformMVC.genruntimeconfig.cache
 C:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\ref\BookPlatformMVC.dll
+c:\Users\hello\BookPlatformMVC\obj\Debug\net9.0\compressed\hzs66vy22l-ancb0lx03y.gz
